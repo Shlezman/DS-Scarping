@@ -2,9 +2,8 @@ import asyncio
 import base64
 
 import bs4
-from bs4 import BeautifulSoup
 import pandas as pd
-from playwright.async_api import async_playwright
+from scraper import Scraper
 
 CITY_CODES = {
     'LONDON': '/m/04jpl',
@@ -15,13 +14,7 @@ CITY_CODES = {
 DATE_FORMAT = '%Y-%m-%d'
 
 
-class GoogleFlights:
-    def __init__(self, departure_date, return_date, origin_city, destination_city):
-        self.departure_date = departure_date
-        self.return_date = return_date
-        self.origin_city = origin_city
-        self.destination_city = destination_city
-
+class GoogleFlights(Scraper):
     def get_flights(self, soup: bs4.BeautifulSoup, selector: str) -> list:
         """
         Extract the exact data from the full html file
@@ -69,36 +62,7 @@ class GoogleFlights:
                 'div.yR1fYc div.OgQvJf.nKlB3b div.KhL0De div.U3gSDe div.BVAVmf.I11szd.POX3ye div.MEDXEe span span span'))
         } for item in items]
 
-    async def get_page_source_after_button_click(self, url, button_selector) -> str:
-        """
-        Async get page source after expending all the flights using Playwright
-        :param url: google-flights url
-        :param button_selector: the selector of the button
-        :return: page source
-        """
-        async with async_playwright() as pw:
-            browser = await pw.chromium.launch(headless=True)
-            page = await browser.new_page()
-            await page.goto(url)
-
-            # Wait for and click the button
-            await page.wait_for_selector(button_selector)
-            await page.click(button_selector)
-
-            # Random delay to simulate human-like behavior
-            await asyncio.sleep(3)
-
-            # Wait for page to load
-            await page.wait_for_load_state('networkidle')
-
-            # Get page source
-            full_page_source = await page.content()
-
-            await browser.close()
-
-        return full_page_source
-
-    def create_google_flights_url(self) -> str:
+    def create_url(self) -> str:
         """
         Creates a Google Flights search URL
 
@@ -137,7 +101,7 @@ class GoogleFlights:
         base_url = "https://www.google.com/travel/flights/search?tfs="
         return (base_url + encoded_params).replace("///////////", "___________")
 
-    async def scarpe_from_page(self) -> pd.DataFrame:
+    async def get_data(self) -> pd.DataFrame:
         """
         Extract the data from the website
         :return:
@@ -145,10 +109,11 @@ class GoogleFlights:
         # selectors for flight divs in the html page
         pushed_flights = 'c-wiz.zQTmif div.cKvRXe div.PSZ8D.EA71Tc div.FXkZv div.XwbuFf div div:nth-child(2) div:nth-child(1) ul li'
         other_flights = 'c-wiz.zQTmif div.cKvRXe div.PSZ8D.EA71Tc div.FXkZv div.XwbuFf div div:nth-child(2) div:nth-child(4) ul li'
+        data =  await super().scarpe_from_page(selector=pushed_flights,button_selector="#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.PSZ8D.EA71Tc > div.FXkZv > div.XwbuFf > div > div:nth-child(2) > div:nth-child(4) > ul > li.ZVk93d > div > span.XsapA > div > button") + \
+        await super().scarpe_from_page(selector=other_flights,
+                                       button_selector="#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.PSZ8D.EA71Tc > div.FXkZv > div.XwbuFf > div > div:nth-child(2) > div:nth-child(4) > ul > li.ZVk93d > div > span.XsapA > div > button")
+        return pd.DataFrame(data)
 
-        soup = BeautifulSoup(await self.get_page_source_after_button_click(self.create_google_flights_url(),
-                                                                           "#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.PSZ8D.EA71Tc > div.FXkZv > div.XwbuFf > div > div:nth-child(2) > div:nth-child(4) > ul > li.ZVk93d > div > span.XsapA > div > button"),
-                             'html.parser')
-        flights = self.get_flights(soup, pushed_flights) + self.get_flights(soup, other_flights)
-
-        return pd.DataFrame(flights)
+# if __name__ == "__main__":
+#     get = asyncio.run(GoogleFlights(departure_date='2025-02-25', return_date='2025-02-29', origin_city="rome", destination_city="paris").get_data())
+#     print(get.info())

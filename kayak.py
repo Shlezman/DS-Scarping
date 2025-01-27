@@ -23,10 +23,9 @@ class Kayak(Scraper):
         return ''.join(random.choice(characters) for _ in range(length))
 
     def create_url(self) -> str:
-        return f"https://www.he.kayak.com/flights/{CITY_CODES[self.origin_city.upper()]}-{CITY_CODES[self.destination_city.upper()]}/{self.departure_date}/{self.return_date}?ucs={self.generate_ucs()}&sort=bestflight_a"
+        return f"https://www.il.kayak.com/flights/{CITY_CODES[self.origin_city.upper()]}-{CITY_CODES[self.destination_city.upper()]}/{self.departure_date}/{self.return_date}?ucs={self.generate_ucs()}&sort=bestflight_a"
 
-    def get_flights(self, soup: bs4.BeautifulSoup, selector):
-        #"div > div:nth-child(3) > div.Fxw9 > div> div"
+    def get_flights(self, soup: bs4.BeautifulSoup, selector)-> list:
         items = soup.select(selector)
         return [{
             'start_hour': item.select_one(
@@ -75,9 +74,13 @@ class Kayak(Scraper):
         :return:
         """
         # selectors for flight divs in the html page
-        data =  await super().scarpe_from_page(selector="div > div:nth-child(3) > div.Fxw9 > div> div",button_selector="div > div.ULvh > div")
+        button_selector = None
+        selector = "div > div:nth-child(3) > div.Fxw9 > div > div"
+        data =  await super().scarpe_from_page(selector=selector,button_selector=button_selector)
         return pd.DataFrame(data)
 
 if __name__ == "__main__":
-    get = asyncio.run(Kayak(departure_date='2025-02-25', return_date='2025-02-29', origin_city="rome", destination_city="paris").get_data())
+    kayak = Kayak(departure_date='2025-02-25', return_date='2025-02-29', origin_city="rome", destination_city="paris")
+    get = asyncio.run(kayak.get_data())
+    print(kayak.create_url())
     print(get.info())

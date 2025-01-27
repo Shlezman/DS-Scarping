@@ -109,11 +109,12 @@ class GoogleFlights(Scraper):
         # selectors for flight divs in the html page
         pushed_flights = 'c-wiz.zQTmif div.cKvRXe div.PSZ8D.EA71Tc div.FXkZv div.XwbuFf div div:nth-child(2) div:nth-child(1) ul li'
         other_flights = 'c-wiz.zQTmif div.cKvRXe div.PSZ8D.EA71Tc div.FXkZv div.XwbuFf div div:nth-child(2) div:nth-child(4) ul li'
-        data =  await super().scarpe_from_page(selector=pushed_flights,button_selector="#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.PSZ8D.EA71Tc > div.FXkZv > div.XwbuFf > div > div:nth-child(2) > div:nth-child(4) > ul > li.ZVk93d > div > span.XsapA > div > button") + \
-        await super().scarpe_from_page(selector=other_flights,
-                                       button_selector="#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.PSZ8D.EA71Tc > div.FXkZv > div.XwbuFf > div > div:nth-child(2) > div:nth-child(4) > ul > li.ZVk93d > div > span.XsapA > div > button")
+        button_selector = 'c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.PSZ8D.EA71Tc > div.FXkZv > div.XwbuFf > div > div:nth-child(2) > div:nth-child(4) > ul > li.ZVk93d > div > span.XsapA > div > button'
+        data =  await super().scarpe_from_page(selector=pushed_flights,button_selector=button_selector) + await super().scarpe_from_page(selector=other_flights,button_selector=button_selector)
         return pd.DataFrame(data)
 
+# # Vlidate
 # if __name__ == "__main__":
-#     get = asyncio.run(GoogleFlights(departure_date='2025-02-25', return_date='2025-02-29', origin_city="rome", destination_city="paris").get_data())
+#     print(GoogleFlights(departure_date='2025-02-25', return_date='2025-02-27', origin_city="paris", destination_city="london").create_url())
+#     get = asyncio.run(GoogleFlights(departure_date='2025-02-25', return_date='2025-02-27', origin_city="paris", destination_city="london").get_data())
 #     print(get.info())

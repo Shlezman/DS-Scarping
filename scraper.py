@@ -19,7 +19,7 @@ class Scraper:
         self.return_date = return_date
         self.origin_city = origin_city
         self.destination_city = destination_city
-    def get_flights(self, soup: bs4.BeautifulSoup, selector: str):
+    def get_flights(self, soup: bs4.BeautifulSoup, selector: str)-> list:
         items = soup.select(selector)
         pass #return [{} for item in items]
     async def get_page_source_after_button_click(self, url, button_selector) -> str:
@@ -35,14 +35,15 @@ class Scraper:
             await page.goto(url)
 
             # Wait for and click the button
-            await page.wait_for_selector(button_selector)
-            await page.click(button_selector)
+            if button_selector:
+                await page.wait_for_selector(button_selector)
+                await page.click(button_selector)
 
-            # Random delay to simulate human-like behavior
-            await asyncio.sleep(3)
+                # Random delay to simulate human-like behavior
+                await asyncio.sleep(5)
 
-            # Wait for page to load
-            await page.wait_for_load_state('networkidle')
+                # Wait for page to load
+                await page.wait_for_load_state('networkidle')
 
             # Get page source
             full_page_source = await page.content()
@@ -52,7 +53,7 @@ class Scraper:
         return full_page_source
     def create_url(self) -> str:
         pass
-    async def scarpe_from_page(self, selector, button_selector) -> pd.DataFrame:
+    async def scarpe_from_page(self, selector, button_selector) -> list:
         """
         Extract the data from the website
         :return:
@@ -61,4 +62,4 @@ class Scraper:
 
         soup = BeautifulSoup(await self.get_page_source_after_button_click(self.create_url(), button_selector),'html.parser')
 
-        return pd.DataFrame(self.get_flights(soup, selector))
+        return self.get_flights(soup, selector)

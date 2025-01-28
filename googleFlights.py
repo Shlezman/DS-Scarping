@@ -15,7 +15,7 @@ DATE_FORMAT = '%Y-%m-%d'
 
 
 class GoogleFlights(Scraper):
-    def get_flights(self, soup: bs4.BeautifulSoup, selector: str) -> list:
+    def _get_flights(self, soup: bs4.BeautifulSoup, selector: str) -> list:
         """
         Extract the exact data from the full html file
         :param soup: bs4.BeautifulSoup google flights html based
@@ -118,3 +118,4 @@ class GoogleFlights(Scraper):
 #     print(GoogleFlights(departure_date='2025-02-25', return_date='2025-02-27', origin_city="paris", destination_city="london").create_url())
 #     get = asyncio.run(GoogleFlights(departure_date='2025-02-25', return_date='2025-02-27', origin_city="paris", destination_city="london").get_data())
 #     print(get.info())
+#     print(get.head())

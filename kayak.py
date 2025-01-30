@@ -80,9 +80,22 @@ class Kayak(Scraper):
         :return:
         """
         # selectors for flight divs in the html page
+        headers = {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "accept-language": "he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=0, i",
+    "referer": self.create_url(),
+    "sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?1",
+    "sec-ch-ua-platform": "\"Android\"",
+    "sec-fetch-dest": "iframe",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
+    "upgrade-insecure-requests": "1",
+}
         button_selector = '#listWrapper > div > div.ULvh > div'
         selector = "div > div:nth-child(3) > div.Fxw9 > div > div:nth-child(1)" #listWrapper > div > div:nth-child(3) > div.Fxw9 > div
-        data =  await super().scarpe_from_page(selector=selector,button_selector=button_selector, cookies_path="cookies.json")
+        data =  await super().scarpe_from_page(selector=selector,button_selector=button_selector, cookies_path="cookies.json", response_url='https://www.kayak.com/s/', headers=headers)
         return pd.DataFrame(data)
 
 

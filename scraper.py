@@ -47,12 +47,6 @@ class Scraper:
             if response_url:
                 page.on('response', _handle_response)
 
-            # Set extra HTTP headers
-            await page.set_extra_http_headers({
-                'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                'Accept-Language': 'en-US,en;q=0.5'
-            })
             await page.goto(url)
             await page.wait_for_load_state('domcontentloaded')
             await page.mouse.move(100, 400)
@@ -73,12 +67,14 @@ class Scraper:
                 await page.keyboard.press("PageDown")
                 await asyncio.sleep(0.9)
                 await page.wait_for_load_state('networkidle')
+
             # Get page source
             full_page_source = await page.content()
 
             with open("cookies.json", "w") as f:
                 f.write(json.dumps(await context.cookies()))
             await browser.close()
+
         return full_page_source
     def _get_flights(self, soup: bs4.BeautifulSoup, selector: str)-> list:
         items = soup.select(selector)

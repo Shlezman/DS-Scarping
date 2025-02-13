@@ -1,0 +1,1024 @@
+{
+    "cookies": [
+        {
+            "name": "_tracker",
+            "value": "%7B%22UUID%22%3A%22A1686AD1-CE42-4BC5-B336-9E5018A05AC0%22%7D",
+            "domain": ".travelaudience.com",
+            "path": "/",
+            "expires": 1773405896,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "_tracker",
+            "value": "%7B%22UUID%22%3A%22A1686AD1-CE42-4BC5-B336-9E5018A05AC0%22%7D",
+            "domain": "ads.travelaudience.com",
+            "path": "/",
+            "expires": 1773409808,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "sc_at",
+            "value": "v2|H4sIAAAAAAAAAAXBgQ0AIAgDsItIEMXNc6bhC463RQR3UvbeoC05jFdlRUgVCFd2D8yz0vdB+wcAUlY8MgAAAA==",
+            "domain": ".snapchat.com",
+            "path": "/",
+            "expires": 1773146697,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "mst_iBfK2w",
+            "value": "_mKUvx1TdYfMuVMZxWbvEwyR4GMiijn8Ek80xOwQWjRot3m9DJSInJs14dUrTuAaiTLTkon02Jb--68ZH0eBoA",
+            "domain": "content.r9cdn.net",
+            "path": "/",
+            "expires": 1739455509,
+            "httpOnly": true,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "mst_ADIrlA",
+            "value": "ZpE4MzoncOgdVST1WAXPNAyR4GMiijn8Ek80xOwQWjSH04sTh_nn9dK44KO4TwQn1MjRLloT9SfsCzar3vYZ2Q",
+            "domain": "content.r9cdn.net",
+            "path": "/",
+            "expires": 1739455509,
+            "httpOnly": true,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "cktst",
+            "value": "320869070",
+            "domain": ".yieldoptimizer.com",
+            "path": "/",
+            "expires": 1770986697,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "ckid",
+            "value": "3019861880716",
+            "domain": ".yieldoptimizer.com",
+            "path": "/",
+            "expires": 1770990610,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "ph",
+            "value": "%7B%22p%22%3A%5B%5D%2C%22t%22%3A%5B%5D%7D",
+            "domain": ".yieldoptimizer.com",
+            "path": "/",
+            "expires": 1770990610,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "fbh0",
+            "value": "%7B%7D",
+            "domain": ".yieldoptimizer.com",
+            "path": "/",
+            "expires": 1770990610,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "gcma",
+            "value": "%7B%22t%22%3A0%2C%22o%22%3Afalse%7D",
+            "domain": ".yieldoptimizer.com",
+            "path": "/",
+            "expires": 1770990610,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "rmxc",
+            "value": "%7B%22t%22%3A0%2C%22e%22%3A%22%22%2C%22i%22%3Afalse%7D",
+            "domain": ".yieldoptimizer.com",
+            "path": "/",
+            "expires": 1770990610,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "dph",
+            "value": "%7B%22t%22%3A%5B141301%5D%2C%22dp%22%3A%5B5658%5D%7D",
+            "domain": ".yieldoptimizer.com",
+            "path": "/",
+            "expires": 1770990610,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "_cfuvid",
+            "value": "Cw7zivVsr6VuEdxZ_o2skWJFgJDInDaof2.5ikyQbBE-1739450699221-0.0.1.1-604800000",
+            "domain": ".affirm.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "axp-override",
+            "value": "",
+            "domain": "api-cf.affirm.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "chameleon-profile-id",
+            "value": "",
+            "domain": "api-cf.affirm.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "tracker_device",
+            "value": "286af4fe-1427-42dc-af6e-5bf01693e3e0",
+            "domain": ".affirm.com",
+            "path": "/",
+            "expires": 1774010699,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "t_v2_s",
+            "value": "IjI4NmFmNGZlLTE0MjctNDJkYy1hZjZlLTViZjAxNjkzZTNlMCI.Go96yw.ViB7SKk3lhHcmPzbdCBiefVFJMM",
+            "domain": ".affirm.com",
+            "path": "/",
+            "expires": 1774010699,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "3060738.3440491",
+            "value": "286af4fe-1427-42dc-af6e-5bf01693e3e0",
+            "domain": ".affirm.com",
+            "path": "/",
+            "expires": 1774010699,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "session",
+            "value": "eyJfcGVybWFuZW50Ijp0cnVlfQ.Go96yw.Q3LOTw9sD8Gi12xaQdesJsNSe0o",
+            "domain": "api-cf.affirm.com",
+            "path": "/",
+            "expires": 1774010699,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "__cf_bm",
+            "value": "f.W4q0v7yqGL5gxAWvwGdu3Aw3kN.GFf6l6zCHqUvA4-1739454609-1.0.1.1-7Q.0GyZDB0lJVNwpZdXSp1UKN0.nRP6kGXWaurhARBhGZj0yhXWVgR1wE8mk4EayfanqIt8nxAs71VmDJN3zng",
+            "domain": ".affirm.com",
+            "path": "/",
+            "expires": 1739456409,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "IDE",
+            "value": "AHWqTUnve3LEX5I-q-R_F0GEhFP01piEq1S1tn0ngHwctg07zPeAy9gbpaiqeMU6",
+            "domain": ".doubleclick.net",
+            "path": "/",
+            "expires": 1774010697,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "receive-cookie-deprecation",
+            "value": "1",
+            "domain": ".doubleclick.net",
+            "path": "/",
+            "expires": 1755006610,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "DSID",
+            "value": "NO_DATA",
+            "domain": ".doubleclick.net",
+            "path": "/",
+            "expires": 1739458211,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "iperceptions.com",
+            "value": "[{\"id\":\"05959768-1b8f-44b8-b99b-5ad8fd374145\",\"history\":[],\"visitors\":[{\"id\":\"4904825259\",\"time\":\"2025-02-13T12:21:30.318Z\",\"host\":\"www.kiwi.com\"}]}]",
+            "domain": ".universal.iperceptions.com",
+            "path": "/",
+            "expires": 1747225290,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "SKYPICKER_AFFILIATE",
+            "value": "skypicker",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": 1742041287,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "__kw_darwin_saved_groups",
+            "value": "%7B%22search-booking%22%3A%22EXCLUSIVE_GROUP_1%22%7D",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": 1774009287,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "SKYPICKER_VISITOR_UNIQID",
+            "value": "f86dbef7-be15-4fe8-a5fc-1f0594f8318b",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": 1774009287,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "kw_user_market",
+            "value": "il",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": 1774009287,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "kw_market",
+            "value": "il",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "kw_language",
+            "value": "en",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "preferred_currency",
+            "value": "ils",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": 1774009288,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "recentSearch",
+            "value": "{%22deepLink%22:%22origin=london_gb&destination=paris_fr&outboundDate=2025-02-13_2025-02-20&inboundDate=2025-03-12&pageName=homePage%22}",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": 1742041288,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "recentRedirect",
+            "value": "1",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "_gtm_ud_fullstory",
+            "value": "rest",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1770985288,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_gtm_group",
+            "value": "rest",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1770985288,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "ipe_s",
+            "value": "e10ff86c-ce38-645d-8d02-b3b202102758",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "Lax"
+        },
+        {
+            "name": "forterToken",
+            "value": "95e602f5352446bda0be694a55b59ee4_1739449288095__UDF43-m4_21ck_",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1774009289,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "ipe.35675.pageViewedCount",
+            "value": "1",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "Lax"
+        },
+        {
+            "name": "ipe.35675.pageViewedDay",
+            "value": "44",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "Lax"
+        },
+        {
+            "name": "ipe_35675_fov",
+            "value": "%7B%22numberOfVisits%22%3A1%2C%22sessionId%22%3A%22e10ff86c-ce38-645d-8d02-b3b202102758%22%2C%22expiry%22%3A%222025-03-15T12%3A21%3A30.457Z%22%2C%22lastVisit%22%3A%222025-02-13T12%3A21%3A30.457Z%22%7D",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": 1742041290,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "Lax"
+        },
+        {
+            "name": "__kwc_settings",
+            "value": "%7B%22marketing%22%3Atrue%2C%22analytics%22%3Atrue%7D",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": 1774009308,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "__kwc_agreed",
+            "value": "true",
+            "domain": "www.kiwi.com",
+            "path": "/",
+            "expires": 1774009308,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "_ga",
+            "value": "GA1.1.1311028872.1739449289",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1774009308,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_gcl_au",
+            "value": "1.1.359961879.1739449309",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1747225309,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_ga_P28G7XCD9Q",
+            "value": "GS1.1.1739449293.1.1.1739449308.0.0.0",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1774009308,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_ga_8JR7GGJF3G",
+            "value": "GS1.1.1739449288.1.1.1739449308.0.0.7737580",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1774009308,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_ga_8JR7GGJF3GG-P28G7XCD9Q",
+            "value": "GS1.1.1739449289.1.1.1739449308.0.0.0",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1774009308,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "FPAU",
+            "value": "1.1.359961879.1739449309",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1747225308,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "FPID",
+            "value": "FPID2.2.tjp3qkpwMveaWeGaJBG92rSS8eNOBBtlWwzEDyySii4%3D.1739449289",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1774009313,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "FPLC",
+            "value": "159mNXmWwrv653GPMP2Y2iW0w6XCfCIkvvVIPufd37f1oiB0l0r%2BePTGZhv3jVv58WGB4P5G1m7MJcTs%2F9RxcT7%2FfVV2FtN3MkWdO5u8IU7fNWj6Lw993i9%2F7sOZrg%3D%3D",
+            "domain": ".kiwi.com",
+            "path": "/",
+            "expires": 1739521313,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "zc",
+            "value": "12f74043-aa0a-437f-759a-584f0c47ddba",
+            "domain": ".zeotap.com",
+            "path": "/",
+            "expires": 1770990610,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "zsc",
+            "value": "%BFB%CE%E0%12%7F%0D%3A%09%1C%D6~%1Dx%9DLq%3C9%3E%9B%B4%09%99%10%C2%BC%A1%92%10%07%B8%2FP%0C%0C%A8%D4%7CW%3Eh%2B%BF%B6%A1%F6%CD%F1%84%EAi%80%E6%07%90%D1%3F%EC%7C",
+            "domain": ".zeotap.com",
+            "path": "/",
+            "expires": 1739541010,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "KRTBCOOKIE_731",
+            "value": "15167-A1686AD1CE424BC5B3369E5018A05AC0&KRTB&23577-A1686AD1CE424BC5B3369E5018A05AC0",
+            "domain": ".pubmatic.com",
+            "path": "/",
+            "expires": 1747226850,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "PugT",
+            "value": "1739450850",
+            "domain": ".pubmatic.com",
+            "path": "/",
+            "expires": 1742042850,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "SPSC",
+            "value": "6b700016ALiiG1oCHPliofqxaXqIens",
+            "domain": ".sojern.com",
+            "path": "/",
+            "expires": 1770986697,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "gadex",
+            "value": "ChtDQUVTRUtURXViTjJnZ3RJM0hRQWxIRHhMeU0SDAjJ0re9BhCo9c2PAw==",
+            "domain": ".sojern.com",
+            "path": "/",
+            "expires": 1770990697,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "xdr",
+            "value": "ChMxNDE5OTU0ODA5NTY1NTgzNDE3EgwI4dO3vQYQud7AjwM=",
+            "domain": ".sojern.com",
+            "path": "/",
+            "expires": 1770990849,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "cid",
+            "value": "3be4cd77-43a5-41fe-9b0d-2fd9a956cc21",
+            "domain": ".sojern.com",
+            "path": "/",
+            "expires": 1770990610,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "MUID",
+            "value": "376B9080950263062F40851294926228",
+            "domain": ".bing.com",
+            "path": "/",
+            "expires": 1773146697,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "MR",
+            "value": "0",
+            "domain": ".c.bing.com",
+            "path": "/",
+            "expires": 1740055497,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "MSPTC",
+            "value": "--_vVajkIqYgF9VaFLArlF0ctFmTn6uNzGLTjC8q-Vg",
+            "domain": ".bing.com",
+            "path": "/",
+            "expires": 1773146697,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "MSPTC",
+            "value": "inW6B-4TDs00fTSAsuZUb4cshiaYia4hWwWWn7U1WGc",
+            "domain": ".bat.bing.com",
+            "path": "/",
+            "expires": 1773146697,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "XANDR_PANID",
+            "value": "aJjpRELW4lp9y0YdQK7jPWwzF0v-nmhCyqWa9qVLga87Hnf9ts5zkbvxcRiXye4YuFg9L8fevG7Q_rJ9GUSHPm3_pg7esp8fDH3f12q6Sss.",
+            "domain": ".adnxs.com",
+            "path": "/",
+            "expires": 1747226850,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "anj",
+            "value": "dTM7k!M4/8CxrEQF']wIg2C$Mq5.lQ!]tb6U69DSP)[Q]P)j.gPK(x)",
+            "domain": ".adnxs.com",
+            "path": "/",
+            "expires": 1747226850,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "receive-cookie-deprecation",
+            "value": "1",
+            "domain": ".adnxs.com",
+            "path": "/",
+            "expires": 1774010850,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "uuid2",
+            "value": "1419954809565583417",
+            "domain": ".adnxs.com",
+            "path": "/",
+            "expires": 1747226850,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "_ttp",
+            "value": "2szFrsxQmYI9oZsVUpDEFH8TfIm",
+            "domain": ".tiktok.com",
+            "path": "/",
+            "expires": 1773150610,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "kmkid",
+            "value": "ALiiG1oCHPliofqxaXqIens",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1774010695,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "kayak",
+            "value": "oMssPJH1GXffzr$5H8nz",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1774010695,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "csid",
+            "value": "2a7e050b-a41e-4b7f-b2a1-4ae155542c2a",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "Strict"
+        },
+        {
+            "name": "_fbp",
+            "value": "fb.1.1739450697000.0.08808364274392388",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1769863497,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "_yoid",
+            "value": "051fdc5b-4b8c-4dd9-b923-1a2361a14676",
+            "domain": ".www.kayak.com",
+            "path": "/",
+            "expires": 1770986699,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "Lax"
+        },
+        {
+            "name": "_yosid",
+            "value": "76ac4dca-c197-447b-beaa-d09f19c930b6",
+            "domain": ".www.kayak.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "Lax"
+        },
+        {
+            "name": "p1.med.sid",
+            "value": "R-5JYiQfiqYuvgd$_jMr8Mi-DJHHhfjrv4SJH_Pm0iR8qz12a0_bDyyjtaUZwKuTZ",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": -1,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "tracker_device_is_opt_in",
+            "value": "true",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1774014609,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "Lax"
+        },
+        {
+            "name": "tracker_device",
+            "value": "286af4fe-1427-42dc-af6e-5bf01693e3e0",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1774014609,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "Lax"
+        },
+        {
+            "name": "_gcl_au",
+            "value": "1.1.1648278691.1739450697",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1747226697,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_ga",
+            "value": "GA1.1.255881287.1739450697",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1774014610,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_ga_PWCRSK2Y5Y",
+            "value": "GS1.1.1739454610.2.0.1739454610.0.0.618218110",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1774014610,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_tt_enable_cookie",
+            "value": "1",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1773150610,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_ttp",
+            "value": "0AN1yZRY-mkC2nfkEJfc7ijd8au.tt.1",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1773150610,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_uetsid",
+            "value": "54dc0e70ea0811ef9c89f1205edeaaa4|1g1bete|2|fte|0|1870",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1739541010,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "_uetvid",
+            "value": "54dc1120ea0811efa9cb53b4708956c5",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1773150610,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "FPGSID",
+            "value": "1.1739454610.1739454610.G-PWCRSK2Y5Y.Gy8dnMCfOrR00XdsPViy2Q",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1739456410,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "Strict"
+        },
+        {
+            "name": "forterToken",
+            "value": "616acc9354fb4e9992a3298e5b7dea25_1739454608552__UDF43-m4_21ck_",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1774014610,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "__gads",
+            "value": "ID=c3c8ad97d1b1fbc1:T=1739450698:RT=1739454610:S=ALNI_MaJqolYMQT4u0qnlUxRmOE4qGGGpg",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1773146698,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "__gpi",
+            "value": "UID=00000fe5785b1e02:T=1739450698:RT=1739454610:S=ALNI_MbP5DPuZfWz-jDeJxD6TAV41Bm_kw",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1773146698,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "__eoi",
+            "value": "ID=fe7c7a954b36dba2:T=1739450698:RT=1739454610:S=AA-AfjaBxrB7_5imAp2TMLYmUlUq",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1755002698,
+            "httpOnly": false,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "FCNEC",
+            "value": "%5B%5B%22AKsRol_QgLanbbhIJZGirhuR2hteGU8p_onpCqSsiAv0SFZTvILJEo1RemtlFdmYun0Z7HKci0TrRKci8T3wczbYA2G3ikJeDuVcCJi7Q2bvL4jlIrfgu_niqshztuZSeR6UPMCn1AAVYU1_KDztMjtuCBs4GhxuJg%3D%3D%22%5D%5D",
+            "domain": ".kayak.com",
+            "path": "/",
+            "expires": 1770990611,
+            "httpOnly": false,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "kayak.mc",
+            "value": "ATKBC3Av8C2bb-tUFMDV2ilgDhZgAvOUekmMQmnsuZKCHwlZf5p_4uK_kDrYoqYH8mM_hWB9iQJQe5wXIB7CG2TKL4bPB6Y77x7aBzjnehvQGmp2pGgvXx4z75z4jTrpWGZ8WyC1PjWmMdJFtfsy8aGnlAg7qNcJFwTM6uW951gJdhzK7A7fgsgz7RYJ-l0nT1wTwxllHoehDj7JZmkQ4TNRzyOdLmnIAt77P2Hq0WiNJnEuKaI6xX315-j4RnINy9OXq_GFl6vQpYr59GXfkou01HvRBYUwM2L_RXGp_NFMR-sRqv8bknAdaDhcuRkBl2DEXzSFWjy_bmZgSRAmT8neohl8ecCcN8U2hBIu-WOq5EDJ9lCQo8emQZefdHZrZ4aBAC-pV1wS2Q9tQbIQxtFuDnP6InlMHJOlnQFUx12_",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1774014611,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "Apache",
+            "value": "BR16_g-AAABlP9XOpI-06-PsnkOA",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1774014620,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "cluster",
+            "value": "5",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1739457320,
+            "httpOnly": true,
+            "secure": true,
+            "sameSite": "None"
+        },
+        {
+            "name": "mst_iBfK2w",
+            "value": "gxa3qtmNNn4oRATbTPwEB4ne9CRwBCz5HBNCzW_HTflc3shztfrlbZWLO0zUn5YtiTLTkon02Jb--68ZH0eBoA",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1739455520,
+            "httpOnly": true,
+            "secure": false,
+            "sameSite": "None"
+        },
+        {
+            "name": "mst_ADIrlA",
+            "value": "XtcP_R4sjFhf7uKHe43aoone9CRwBCz5HBNCzW_HTfmd5iGH-5mHpiP5lFeYEXrIH7km-eegODbJ5fFbm5rqGg",
+            "domain": "www.kayak.com",
+            "path": "/",
+            "expires": 1739455520,
+            "httpOnly": true,
+            "secure": false,
+            "sameSite": "None"
+        }
+    ],
+    "origins": [
+        {
+            "origin": "https://www.kayak.com",
+            "localStorage": [
+                {
+                    "name": "_uetsid_exp",
+                    "value": "Fri, 14 Feb 2025 13:50:10 GMT"
+                },
+                {
+                    "name": "feh--37d28a",
+                    "value": "0001739454610824194456441b68d14a9a4cef78c4c94dd6"
+                },
+                {
+                    "name": "feh--da4",
+                    "value": "00017394546095766c898be13663c13b05578b01f2ef9d8f"
+                },
+                {
+                    "name": "feh--6bc5339",
+                    "value": "0001739454608947fba5c1434ab286481bf766cfe29c75b5"
+                },
+                {
+                    "name": "_uetvid_exp",
+                    "value": "Tue, 10 Mar 2026 13:50:10 GMT"
+                },
+                {
+                    "name": "_uetsid",
+                    "value": "54dc0e70ea0811ef9c89f1205edeaaa4|1g1bete|2|fte|0|1870"
+                },
+                {
+                    "name": "forterToken",
+                    "value": "616acc9354fb4e9992a3298e5b7dea25,1739454610436"
+                },
+                {
+                    "name": "feh--8ff2b28",
+                    "value": "0001739454608809699736e3c99e1eb04f638127193e5b35"
+                },
+                {
+                    "name": "feh--9fd29358",
+                    "value": "0001739454608799cce16c45e622d9ceae4b626c9353ecec"
+                },
+                {
+                    "name": "feh--e3a677a0",
+                    "value": "0001739454608809d751713988987e9331980363e24189ce"
+                },
+                {
+                    "name": "feh--c52",
+                    "value": "0001739454609289a159433a077330cb40effc1aa1ec774a"
+                },
+                {
+                    "name": "BKHISTORY2",
+                    "value": "{\"lastUsedTab\":\"flights\",\"flights\":{\"travelers\":1,\"adults\":1,\"seniors\":0,\"child\":0,\"youth\":0,\"seatInfant\":0,\"lapInfant\":0,\"students\":0,\"isMulticity\":false,\"isRefundableSearch\":false,\"oneway\":false,\"pageType\":\"RP\",\"url\":\"flights/PAR-LON/2025-02-26/2025-03-24\",\"tab\":\"flights\",\"flex_category\":\"exact\",\"originMultiAirports\":[{\"code\":\"PAR\",\"display\":\"Paris (PAR)\",\"description\":\"Paris, France - All airports\",\"nearby\":false}],\"origincode\":\"PAR\",\"origin_code\":\"PAR\",\"origin\":\"PAR\",\"origin_location\":\"Paris\",\"originLocation\":\"Paris\",\"nearby_origin\":false,\"destinationMultiAirports\":[{\"code\":\"LON\",\"display\":\"London (LON)\",\"description\":\"London, United Kingdom - All airports\",\"nearby\":false}],\"destinationcode\":\"LON\",\"destination_code\":\"LON\",\"destination\":\"LON\",\"destination_location\":\"London\",\"destinationLocation\":\"London\",\"nearby_destination\":false,\"depart_date\":\"02/26/2025\",\"depart_date_canon\":\"2025-02-26\",\"cabin\":\"e\",\"depart_date_flex\":\"exact\",\"return_date\":\"03/24/2025\",\"return_date_canon\":\"2025-03-24\",\"return_date_flex\":\"exact\",\"vertical\":\"flights\",\"navigateToResults\":true,\"searchFormFilterState\":{},\"directFlightsPrecheckedPreference\":false,\"src\":\"\",\"searchingAgain\":\"\",\"c2s\":\"\",\"po\":\"\",\"personality\":\"\",\"provider\":\"-1\",\"last_updated\":\"2025-02-13T13:50:09.174Z\",\"searches\":[{\"travelers\":1,\"adults\":1,\"seniors\":0,\"child\":0,\"youth\":0,\"seatInfant\":0,\"lapInfant\":0,\"students\":0,\"isMulticity\":false,\"isRefundableSearch\":false,\"oneway\":false,\"pageType\":\"RP\",\"url\":\"flights/PAR-LON/2025-02-26/2025-03-24\",\"tab\":\"flights\",\"flex_category\":\"exact\",\"originMultiAirports\":[{\"code\":\"PAR\",\"display\":\"Paris (PAR)\",\"description\":\"Paris, France - All airports\",\"nearby\":false}],\"origincode\":\"PAR\",\"origin_code\":\"PAR\",\"origin\":\"PAR\",\"origin_location\":\"Paris\",\"originLocation\":\"Paris\",\"nearby_origin\":false,\"destinationMultiAirports\":[{\"code\":\"LON\",\"display\":\"London (LON)\",\"description\":\"London, United Kingdom - All airports\",\"nearby\":false}],\"destinationcode\":\"LON\",\"destination_code\":\"LON\",\"destination\":\"LON\",\"destination_location\":\"London\",\"destinationLocation\":\"London\",\"nearby_destination\":false,\"depart_date\":\"02/26/2025\",\"depart_date_canon\":\"2025-02-26\",\"cabin\":\"e\",\"depart_date_flex\":\"exact\",\"return_date\":\"03/24/2025\",\"return_date_canon\":\"2025-03-24\",\"return_date_flex\":\"exact\",\"vertical\":\"flights\",\"navigateToResults\":true,\"searchFormFilterState\":{},\"directFlightsPrecheckedPreference\":false,\"src\":\"\",\"searchingAgain\":\"\",\"c2s\":\"\",\"po\":\"\",\"personality\":\"\",\"provider\":\"-1\",\"last_updated\":\"2025-02-13T13:50:09.174Z\",\"createdAt\":\"2025-02-13T13:50:09.174Z\",\"expiresBy\":\"2025-02-17T17:50:09.174Z\"}]}}"
+                },
+                {
+                    "name": "feh--1bc22",
+                    "value": "0001739454608909f862038fb35071e2f3c08f26b1fba486"
+                },
+                {
+                    "name": "feh--1bda6",
+                    "value": "00017394546096282128a719f8ca018e86120711dffe6e44"
+                },
+                {
+                    "name": "_uetvid",
+                    "value": "54dc1120ea0811efa9cb53b4708956c5"
+                },
+                {
+                    "name": "search_submit_pageId",
+                    "value": "results"
+                }
+            ]
+        },
+        {
+            "origin": "https://www.google.com",
+            "localStorage": [
+                {
+                    "name": "rc::h",
+                    "value": "1739454611345"
+                }
+            ]
+        }
+    ]
+}

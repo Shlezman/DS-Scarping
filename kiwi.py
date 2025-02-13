@@ -120,10 +120,10 @@ class Kiwi(Scraper):
         data =  await super().scarpe_from_page(selector=selector,button_selector=button_selectors, headers=headers, response_url=None)
         return pd.DataFrame(data)
 
-
-if __name__ == "__main__":
-    kayak = Kiwi(departure_date='2025-02-30', return_date='2025-03-12', origin_city="london", destination_city="paris")
-    print(kayak.create_url())
-    get = asyncio.run(kayak.get_data())
+# Example
+# if __name__ == "__main__":
+#     kayak = Kiwi(departure_date='2025-02-30', return_date='2025-03-12', origin_city="london", destination_city="paris")
+#     print(kayak.create_url())
+#     get = asyncio.run(kayak.get_data())
     # print(get.info())
     # print(get.head())

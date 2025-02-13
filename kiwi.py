@@ -4,36 +4,40 @@ import pandas as pd
 import string
 import random
 
+from datetime import datetime
+
 import bs4
 
 from scraper import Scraper
 
 CITY_CODES = {
-    'LONDON': 'LON',
-    'PARIS': 'PAR',
-    'ROME': 'ROM',
+    'LONDON': 'london-united-kingdom',
+    'PARIS': 'paris-france',
+    'ROME': 'rome-italy',
 }
 
 DATE_FORMAT = '%Y-%m-%d'
 
 
 
-class Kayak(Scraper):
+class Kiwi(Scraper):
     def __str__(self):
-        return "Kayak-Scraper"
-
+        return "Kiwi-Scraper"
     def generate_ucs(self, length=8) -> str:
         characters = string.ascii_lowercase + string.digits
         return ''.join(random.choice(characters) for _ in range(length))
 
     def create_url(self) -> str:
-        return f"https://www.kayak.com/flights/{CITY_CODES[self.origin_city.upper()]}-{CITY_CODES[self.destination_city.upper()]}/{self.departure_date}/{self.return_date}?ucs={self.generate_ucs()}&sort=bestflight_a"
 
+        url = f"https://www.kiwi.com/en/search/results/{CITY_CODES[self.origin_city.upper()]}/{CITY_CODES[self.destination_city.upper()]}/{self.departure_date}/{self.return_date}/"
+
+        return url
     def _get_flights(self, soup: bs4.BeautifulSoup, selector)-> list:
         items = []
-        for div in soup.findAll('div', attrs={'class': 'Fxw9-result-item-container'}):
+        for div in soup.findAll('div', attrs={'class': 'group/result-card relative cursor-pointer leading-normal'}):
             items.append(div)
         print(items[0])
+        print(len(items))
         return [{
         'departure_hour': item.select_one(
             'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc div.e2Sc-time').text.strip() if item.select_one(
@@ -91,28 +95,35 @@ class Kayak(Scraper):
         """
         # selectors for flight divs in the html page
         headers = {
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-    "accept-language": "he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7",
-    "priority": "u=0, i",
-    "referer": self.create_url(),
-    "sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
-    "sec-ch-ua-mobile": "?1",
-    "sec-ch-ua-platform": "\"Android\"",
-    "sec-fetch-dest": "iframe",
-    "sec-fetch-mode": "navigate",
-    "sec-fetch-site": "same-origin",
-    "upgrade-insecure-requests": "1",
-}
-
-        button_selector = ['#flight-results-list-wrapper > div.ULvh > div']*2
-        selector = "div > div:nth-child(3) > div.Fxw9 > div > div:nth-child(1)" #listWrapper > div > div:nth-child(3) > div.Fxw9 > div
-        data =  await super().scarpe_from_page(selector=selector,button_selector=button_selector, cookies_path="./cookies/Kayak-Scraper-cookies.json", response_url='https://www.kayak.com/s/horizon/flights/results', headers=headers)
+            "authority": "www.kiwi.com",
+            "method": "GET",
+            "path": self.create_url().replace("https://www.kiwi.com", ""),
+            "scheme": "https",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-US;q=0.8,en;q=0.7",
+            "cache-control": "max-age=0",
+            "priority": "u=0, i",
+            "referer": self.create_url(),
+            "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Google Chrome\";v=\"132\"",
+            "sec-ch-ua-mobile": "?1",
+            "sec-ch-ua-platform": "\"Android\"",
+            "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "same-origin",
+            "sec-fetch-user": "?1",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36"
+        }
+        button_selectors = ['#cookies_accept'] + ['#react-view > div.flex.min-h-screen.flex-col > div.grow.bg-cloud-light > div > div > div > div > div > div.min-w-0.flex-grow.p-400.de\\:p-0.de\\:pb-600.de\\:ps-600.de\\:pt-600 > div > div > div:nth-child(2) > div > div > button']*10
+        selector = '#react-view > div.flex.min-h-screen.flex-col > div.grow.bg-cloud-light > div > div > div > div > div > div.min-w-0.flex-grow.p-400.de\\:p-0.de\\:pb-600.de\\:ps-600.de\\:pt-600 > div > div > div:nth-child(2) > div > div > div > div:nth-child(1)'
+        #"#react-view > div.flex.min-h-screen.flex-col > div.grow.bg-cloud-light > div > div > div > div > div > div.min-w-0.flex-grow.p-400.de\\:p-0.de\\:pb-600.de\\:ps-600.de\\:pt-600 > div > div > div:nth-child(3) > div > div > div"
+        data =  await super().scarpe_from_page(selector=selector,button_selector=button_selectors, headers=headers, response_url=None)
         return pd.DataFrame(data)
 
 
 if __name__ == "__main__":
-    kayak = Kayak(departure_date='2025-02-26', return_date='2025-03-24', origin_city="paris", destination_city="london")
+    kayak = Kiwi(departure_date='2025-02-30', return_date='2025-03-12', origin_city="london", destination_city="paris")
     print(kayak.create_url())
     get = asyncio.run(kayak.get_data())
-    print(get.info())
-    print(get.head())
+    # print(get.info())
+    # print(get.head())

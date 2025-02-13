@@ -110,9 +110,10 @@ class Kayak(Scraper):
         return pd.DataFrame(data)
 
 
-if __name__ == "__main__":
-    kayak = Kayak(departure_date='2025-02-26', return_date='2025-03-24', origin_city="paris", destination_city="london")
-    print(kayak.create_url())
-    get = asyncio.run(kayak.get_data())
-    print(get.info())
-    print(get.head())
+# Example:
+# if __name__ == "__main__":
+#     kayak = Kayak(departure_date='2025-02-26', return_date='2025-03-24', origin_city="paris", destination_city="london")
+#     print(kayak.create_url())
+#     get = asyncio.run(kayak.get_data())
+#     print(get.info())
+#     print(get.head())

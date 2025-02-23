@@ -5,10 +5,89 @@ DATE_FORMAT = '%Y-%m-%d'
 import asyncio
 import json
 import os.path
+import string
 import random
 
 from playwright.async_api import Page, async_playwright
 
+
+def generate_ucs(length=8) -> str:
+    characters = string.ascii_lowercase + string.digits
+    return ''.join(random.choice(characters) for _ in range(length))
+
+def update_session(name: str, new_data: dict) -> None:
+    """Updates or creates a session file."""
+    os.makedirs("./sessions", exist_ok=True)
+    session_file_path = os.path.join("./sessions", f"{name}.json")
+    try:
+        with open(session_file_path, "w") as file:
+            json.dump(new_data, file, indent=4)
+        print(f"Session {name} successfully updated.")
+    except Exception as e:
+        print(f"Failed to update session {name}: {e}")
+
+
+async def scroll_down(page: Page, button_selector: str, scroll_amount: int) -> None:
+    try:
+        await page.mouse.wheel(0,scroll_amount)
+        await asyncio.sleep(random.uniform(1, 3))
+        await page.click(button_selector, timeout=1000)
+    except Exception as e:
+        print(f"faild to press button: {e}")
+
+
+def read_session(session_name: str) -> dict | None:
+    """Reads a specific session file."""
+    session_file_path = os.path.join("./sessions", f"{session_name}.json")
+    try:
+        if not os.path.exists(session_file_path):
+            print(
+                f"Session file for {session_name} not found, not using session."
+            )
+            return None
+        with open(session_file_path, "r") as file:
+            content = file.read()
+            if not content.strip():
+                print(
+                    f"Session file for {session_name} is empty, not using session."
+                )
+                return None
+            return json.loads(content)
+    except json.JSONDecodeError:
+        print(
+            f"Failed to decode session {session_name}, not using session."
+        )
+        return None
+    except Exception as e:
+        print(f"Unexpected error reading session {session_name}: {e}")
+        return None
+
+
+def read_cookies(cookies_name: str) -> dict | None:
+    """Reads a specific session file."""
+    cookies_file_path = os.path.join("./cookies", f"{cookies_name}-cookies.json")
+    try:
+        if not os.path.exists(cookies_file_path):
+            print(
+                f"Cookies file for {cookies_name} not found, not using cookies."
+            )
+            return None
+        with open(cookies_file_path, "r") as file:
+            content = file.read()
+            if not content.strip():
+                print(
+                    f"Cookies file for {cookies_name} is empty, not using cookies."
+                )
+                return None
+            return json.loads(content)
+    except json.JSONDecodeError:
+        print(
+            f"Failed to decode cookies {cookies_name}, not using cookies."
+        )
+        return None
+    except Exception as e:
+        print(f"Unexpected error reading cookies {cookies_name}: {e}")
+        return None
 
 class Scraper:
     def __init__(self, departure_date, return_date, origin_city, destination_city):
@@ -23,51 +102,8 @@ class Scraper:
     def create_url(self) -> str:
         pass
 
-    def __update_session(self, new_data: dict) -> None:
-        """Updates or creates a session file."""
-        os.makedirs("./sessions", exist_ok=True)
-        session_file_path = os.path.join("./sessions", f"{self.__str__()}.json")
-        try:
-            with open(session_file_path, "w") as file:
-                json.dump(new_data, file, indent=4)
-            print(f"Session {self.__str__()} successfully updated.")
-        except Exception as e:
-            print(f"Failed to update session {self.__str__()}: {e}")
 
-    async def __scroll_down(self, page: Page, counter: int, button_selector: str) -> int:
-        try:
-            await asyncio.sleep(random.uniform(1, 4))
-            await page.click(button_selector, timeout=0)
-        except Exception as e:
-            print(f"Click failed: {str(e)}")
-
-    def __read_session(self, session_name: str) -> dict | None:
-        """Reads a specific session file."""
-        session_file_path = os.path.join("./", f"{session_name}.json")
-        try:
-            if not os.path.exists(session_file_path):
-                print(
-                    f"Session file for {session_name} not found, not using session."
-                )
-                return None
-            with open(session_file_path, "r") as file:
-                content = file.read()
-                if not content.strip():
-                    print(
-                        f"Session file for {session_name} is empty, not using session."
-                    )
-                    return None
-                return json.loads(content)
-        except json.JSONDecodeError:
-            print(
-                f"Failed to decode session {session_name}, not using session."
-            )
-            return None
-        except Exception as e:
-            print(f"Unexpected error reading session {session_name}: {e}")
-            return None
-
-    async def _get_page_source(self, url, button_selector: list[str] =None, cookies_path=None, response_url=None, headers:dict = None) -> str:
+    async def _get_page_source(self, url, button_selector: list[str] =None, response_url=None, headers:dict = None) -> str:
         """
         Async get page source after expending all the flights using Playwright
         :param url: website url
@@ -79,19 +115,18 @@ class Scraper:
                 with open("flights.json", "w") as f:
                     flights = response.json()
                     json.dumps(flights, f, indent=4)
-
+        session = read_session(session_name=self.__str__())
+        cookies = read_cookies(cookies_name=self.__str__())
         async with async_playwright() as pw:
             browser = await pw.firefox.launch(headless=False)
             context = await browser.new_context(user_agent='Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36', viewport={'width': 1920, 'height': 1080},
-                                                storage_state=self.__read_session(self.__str__()))
+                                                storage_state=session)
 
             if headers:
                 await context.set_extra_http_headers(headers)
 
-            if cookies_path:
-                with open(cookies_path, "r") as f:
-                    cookies = json.loads(f.read())
-                    await context.add_cookies(cookies)
+            if cookies:
+                await context.add_cookies(cookies)
 
             # Create page from context
             page = await context.new_page()
@@ -101,7 +136,7 @@ class Scraper:
                 page.on('response', _handle_response)
 
             # Simulate human
-            await page.goto(url)
+            await page.goto(url, timeout=100000)
             await page.wait_for_load_state('domcontentloaded')
             await page.mouse.move(random.randint(1, 200), random.randint(1, 400))
             await page.wait_for_timeout(2000)
@@ -110,8 +145,10 @@ class Scraper:
 
             # Wait for and click the button
             if button_selector:
+                scroll_mount = 2000
                 for button in  button_selector:
-                    await self.__scroll_down(page=page, counter=1, button_selector=button)
+                    await scroll_down(page=page, button_selector=button, scroll_amount=scroll_mount)
+                    scroll_mount +=2000
 
                 # Random delay to simulate human-like behavior
                 await asyncio.sleep(5)
@@ -129,18 +166,21 @@ class Scraper:
                 f.write(json.dumps(await context.cookies()))
 
             # Save latest Session
-            self.__update_session(await context.storage_state())
+            update_session(new_data=await context.storage_state(), name=self.__str__())
 
             await browser.close()
         return full_page_source
+
     def _get_flights(self, soup: bs4.BeautifulSoup, selector: str)-> list:
         pass #return [{} for item in items]
-    async def scarpe_from_page(self, selector, button_selector, cookies_path=None, response_url=None, headers=None) -> list:
+
+    async def scarpe_from_page(self, selector, button_selector, response_url=None, headers=None) -> list:
         """
         Extract the data from the website
         :return:
         """
-        soup = BeautifulSoup(await self._get_page_source(url=self.create_url(), button_selector=button_selector, cookies_path=cookies_path, response_url=response_url, headers=headers),'html.parser')
+        soup = BeautifulSoup(await self._get_page_source(url=self.create_url(), button_selector=button_selector, response_url=response_url, headers=headers),'html.parser')
+        print(soup.prettify())
         return self._get_flights(soup, selector)
     def get_data(self):
         pass

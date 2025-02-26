@@ -1,3 +1,5 @@
+import datetime
+
 import bs4
 from bs4 import BeautifulSoup
 DATE_FORMAT = '%Y-%m-%d'
@@ -10,6 +12,7 @@ import random
 
 from playwright.async_api import Page, async_playwright
 
+import pandas as pd
 
 def generate_ucs(length=8) -> str:
     characters = string.ascii_lowercase + string.digits
@@ -99,6 +102,9 @@ class Scraper:
     def __str__(self):
         return "Scraper"
 
+    def __repr__(self):
+        return f'{self.__str__()}({self.departure_date}, {self.return_date}, {self.origin_city}, {self.destination_city})'
+
     def create_url(self) -> str:
         pass
 
@@ -162,6 +168,7 @@ class Scraper:
             # Get page source
             full_page_source = await page.content()
 
+
             with open(f"./cookies/{self.__str__()}-cookies.json", "w+") as f:
                 f.write(json.dumps(await context.cookies()))
 
@@ -177,10 +184,28 @@ class Scraper:
     async def scarpe_from_page(self, selector, button_selector, response_url=None, headers=None) -> list:
         """
         Extract the data from the website
-        :return:
         """
         soup = BeautifulSoup(await self._get_page_source(url=self.create_url(), button_selector=button_selector, response_url=response_url, headers=headers),'html.parser')
-        print(soup.prettify())
         return self._get_flights(soup, selector)
-    def get_data(self):
+
+    def get_data(self)-> pd.DataFrame:
         pass
+
+    async def _add_params(self, ttt: int, los: int) -> pd.DataFrame:
+        flights_results = await self.get_data()
+        flights_results['ttt'], flights_results['los'], flights_results['snapshot_date'] = ttt, los, datetime.datetime.today().strftime(DATE_FORMAT)
+        return flights_results
+
+    async def write_data(self, ttt: int, los: int) -> str:
+        data = await self._add_params(ttt=ttt, los=los)
+        excel_name = self.__str__()+'.csv'
+        file_lock = asyncio.Lock()
+        async with file_lock:
+            if os.path.exists(excel_name):
+                data.to_csv(excel_name, header=False, mode='a')
+                print(f"added data to  {excel_name} for {self.__repr__()}")
+            else:
+                data.to_csv(excel_name, index=False)
+        return self.__repr__()
+
+

@@ -38,15 +38,15 @@ class Kayak(Scraper):
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-center-container div.kI55-duration').text.strip() if item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-center-container div.kI55-duration') else None,
 
-            'arrive_hour': item.select_one(
+            'landing_hour': item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time').text.strip() if item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time') else None,
 
-            'arrive_airport': item.select_one(
+            'landing_airport': item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span').text.strip() if item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span') else None,
 
-            'company': item.select_one(
+            'to_dest_company': item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-logo-date-container div.kI55-airline img')[
                 'alt'].strip() if item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-logo-date-container div.kI55-airline img') else None,
@@ -70,11 +70,14 @@ class Kayak(Scraper):
             'return_arrive_airport': item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span').text.strip() if item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span') else None,
-
             'return_company': item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-logo-date-container div.kI55-airline img')[
                 'alt'].strip() if item.select_one(
                 'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-logo-date-container div.kI55-airline img') else None,
+            'price': item.select_one(
+                'div.nrc6-price-section div.f8F1.f8F1-mod-frp-responsive div.f8F1-price-text').text.strip() if item.select_one(
+                'div.nrc6-price-section div.f8F1.f8F1-mod-frp-responsive div.f8F1-price-text') else None,
+            'is_direct': True if len(item.findAll("div", attrs={'class':"kI55-stop-dot"}))>0 else False
         } for item in items]
 
     async def get_data(self) -> pd.DataFrame:
@@ -103,10 +106,11 @@ class Kayak(Scraper):
         return pd.DataFrame(data)
 
 
-# Example:
-if __name__ == "__main__":
-    kayak = Kayak(departure_date='2025-02-28', return_date='2025-03-21', origin_city="rome", destination_city="paris")
-    print(kayak.create_url())
-    get = asyncio.run(kayak.get_data())
-    print(get.info())
-    print(get.head())
+# region Example:
+# if __name__ == "__main__":
+#     kayak = Kayak(departure_date='2025-02-28', return_date='2025-03-21', origin_city="rome", destination_city="paris")
+#     print(kayak.create_url())
+#     get = asyncio.run(kayak.get_data())
+#     print(get.info())
+#     print(get.head())
+#     get.to_csv('test.csv', index_label=False)

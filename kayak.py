@@ -1,12 +1,9 @@
 import asyncio
 
 import pandas as pd
-import string
-import random
 
 import bs4
-
-from scraper import Scraper
+from scraper import Scraper, generate_ucs
 
 CITY_CODES = {
     'LONDON': 'LON',
@@ -16,73 +13,72 @@ CITY_CODES = {
 
 DATE_FORMAT = '%Y-%m-%d'
 
-
-
 class Kayak(Scraper):
     def __str__(self):
         return "Kayak-Scraper"
 
-    def generate_ucs(self, length=8) -> str:
-        characters = string.ascii_lowercase + string.digits
-        return ''.join(random.choice(characters) for _ in range(length))
-
     def create_url(self) -> str:
-        return f"https://www.kayak.com/flights/{CITY_CODES[self.origin_city.upper()]}-{CITY_CODES[self.destination_city.upper()]}/{self.departure_date}/{self.return_date}?ucs={self.generate_ucs()}&sort=bestflight_a"
+        return f"https://www.kayak.com/flights/{CITY_CODES[self.origin_city.upper()]}-{CITY_CODES[self.destination_city.upper()]}/{self.departure_date}/{self.return_date}?ucs={generate_ucs()}&sort=bestflight_a"
 
     def _get_flights(self, soup: bs4.BeautifulSoup, selector)-> list:
         items = []
-        for div in soup.findAll('div', attrs={'class': 'Fxw9-result-item-container'}):
+        for div in soup.findAll('div', attrs={'class': selector}):
             items.append(div)
         print(items[0])
         return [{
-        'departure_hour': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc div.e2Sc-time').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc div.e2Sc-time') else None,
+            'departure_hour': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc div.e2Sc-time').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc div.e2Sc-time') else None,
 
-        'departure_airport': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc div.c_cgF span').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc div.c_cgF span') else None,
+            'departure_airport': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc div.c_cgF span').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc div.c_cgF span') else None,
 
-        'flight_length': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-center-container div.kI55-duration').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-center-container div.kI55-duration') else None,
+            'flight_length': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-center-container div.kI55-duration').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-center-container div.kI55-duration') else None,
 
-        'arrive_hour': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time') else None,
+            'landing_hour': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time') else None,
 
-        'arrive_airport': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span') else None,
+            'landing_airport': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span') else None,
 
-        'company': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-logo-date-container div.kI55-airline img')['alt'].strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-logo-date-container div.kI55-airline img') else None,
+            'to_dest_company': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-logo-date-container div.kI55-airline img')[
+                'alt'].strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(1) div.kI55-logo-date-container div.kI55-airline img') else None,
 
-        'return_departure_hour': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc div.e2Sc-time').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc div.e2Sc-time') else None,
+            'return_departure_hour': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc div.e2Sc-time').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc div.e2Sc-time') else None,
 
-        'return_departure_airport': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc div.c_cgF span').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc div.c_cgF span') else None,
+            'return_departure_airport': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc div.c_cgF span').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc div.c_cgF span') else None,
 
-        'return_flight_length': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-center-container div.kI55-duration').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-center-container div.kI55-duration') else None,
+            'return_flight_length': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-center-container div.kI55-duration').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-center-container div.kI55-duration') else None,
 
-        'return_arrive_hour': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time') else None,
+            'return_arrive_hour': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.e2Sc-time') else None,
 
-        'return_arrive_airport': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span').text.strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span') else None,
-
-        'return_company': item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-logo-date-container div.kI55-airline img')['alt'].strip() if item.select_one(
-            'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-logo-date-container div.kI55-airline img') else None,
-    } for item in items]
+            'return_arrive_airport': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span').text.strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-flight-segments div.e2Sc.e2Sc-mod-destination div.c_cgF span') else None,
+            'return_company': item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-logo-date-container div.kI55-airline img')[
+                'alt'].strip() if item.select_one(
+                'div.nrc6-wrapper div.nrc6-content-wrapper ol li:nth-child(2) div.kI55-logo-date-container div.kI55-airline img') else None,
+            'price': item.select_one(
+                'div.nrc6-price-section div.f8F1.f8F1-mod-frp-responsive div.f8F1-price-text').text.strip() if item.select_one(
+                'div.nrc6-price-section div.f8F1.f8F1-mod-frp-responsive div.f8F1-price-text') else None,
+            'is_direct': True if len(item.findAll("div", attrs={'class':"kI55-stop-dot"}))>0 else False
+        } for item in items]
 
     async def get_data(self) -> pd.DataFrame:
         """
@@ -104,16 +100,17 @@ class Kayak(Scraper):
     "upgrade-insecure-requests": "1",
 }
 
-        button_selector = ['#flight-results-list-wrapper > div.ULvh > div']*2
-        selector = "div > div:nth-child(3) > div.Fxw9 > div > div:nth-child(1)" #listWrapper > div > div:nth-child(3) > div.Fxw9 > div
-        data =  await super().scarpe_from_page(selector=selector,button_selector=button_selector, cookies_path="./cookies/Kayak-Scraper-cookies.json", response_url='https://www.kayak.com/s/horizon/flights/results', headers=headers)
+        button_selector = ['#flight-results-list-wrapper > div.ULvh > div']*5
+        selector = "Fxw9-result-item-container"
+        data =  await super().scarpe_from_page(selector=selector,button_selector=button_selector, headers=headers)
         return pd.DataFrame(data)
 
 
-# Example:
+# region Example:
 # if __name__ == "__main__":
-#     kayak = Kayak(departure_date='2025-02-26', return_date='2025-03-24', origin_city="paris", destination_city="london")
+#     kayak = Kayak(departure_date='2025-02-28', return_date='2025-03-21', origin_city="rome", destination_city="paris")
 #     print(kayak.create_url())
 #     get = asyncio.run(kayak.get_data())
 #     print(get.info())
 #     print(get.head())
+#     get.to_csv('test.csv', index_label=False)

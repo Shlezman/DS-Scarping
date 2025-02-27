@@ -202,7 +202,7 @@ class Scraper:
         file_lock = asyncio.Lock()
         async with file_lock:
             if os.path.exists(excel_name):
-                data.to_csv(excel_name, header=False, mode='a')
+                data.to_csv(excel_name, header=False, mode='a', index=False)
                 print(f"added data to  {excel_name} for {self.__repr__()}")
             else:
                 data.to_csv(excel_name, index=False)

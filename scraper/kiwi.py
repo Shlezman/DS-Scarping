@@ -1,5 +1,3 @@
-import asyncio
-
 import pandas as pd
 
 import bs4
@@ -15,19 +13,20 @@ CITY_CODES = {
 DATE_FORMAT = '%Y-%m-%d'
 
 
-
 class Kiwi(Scraper):
     def __str__(self):
-        return "Kiwi-Scraper"
+        return "Kiwi"
 
     def create_url(self) -> str:
-
         url = f"https://www.kiwi.com/en/search/results/{CITY_CODES[self.origin_city.upper()]}/{CITY_CODES[self.destination_city.upper()]}/{self.departure_date}/{self.return_date}"
 
         return url
-    def _get_flights(self, soup: bs4.BeautifulSoup, selector)-> list:
-        items = [div for div in soup.findAll('div', attrs={'class': 'group/result-card relative cursor-pointer leading-normal'})]
-        print(f'Number of flights for {self.departure_date}, {self.return_date}, {self.origin_city}, {self.destination_city}: {len(items)}')
+
+    def _get_flights(self, soup: bs4.BeautifulSoup, selector) -> list:
+        items = [div for div in
+                 soup.findAll('div', attrs={'class': 'group/result-card relative cursor-pointer leading-normal'})]
+        print(
+            f'Number of flights for {self.departure_date}, {self.return_date}, {self.origin_city}, {self.destination_city}: {len(items)}')
         return [{
             'departure_hour': item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(1) > div.px-400.py-300.de\\:p-300 > div.flex.flex-col > div.flex.w-full.items-center.justify-between > span:nth-child(1) > div > time').text.strip() if item.select_one(
@@ -41,11 +40,11 @@ class Kiwi(Scraper):
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(1) > div.px-400.py-300.de\\:p-300 > div.flex.flex-col > div.flex.w-full.items-center.justify-between > div.flex.flex-wrap.items-center.justify-center.gap-y-100 > div.flex.me-100 > div > div > time').text.strip() if item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(1) > div.px-400.py-300.de\\:p-300 > div.flex.flex-col > div.flex.w-full.items-center.justify-between > div.flex.flex-wrap.items-center.justify-center.gap-y-100 > div.flex.me-100 > div > div > time') else None,
 
-            'arrive_hour': item.select_one(
+            'landing_hour': item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(1) > div.px-400.py-300.de\\:p-300 > div.flex.flex-col > div.flex.w-full.items-center.justify-between > span:nth-child(5) > div > time').text.strip() if item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(1) > div.px-400.py-300.de\\:p-300 > div.flex.flex-col > div.flex.w-full.items-center.justify-between > span:nth-child(5) > div > time') else None,
 
-            'arrive_airport': item.select_one(
+            'landing_airport': item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(1) > div.px-400.py-300.de\\:p-300 > div.flex.flex-col > div.w-full.items-center.grid.grid-cols-\\[1fr_auto_1fr\\].gap-400.pb-100.pt-100 > div.text-end > span > div > div.w-full.whitespace-nowrap.lm\\:flex.flex > div > div').text.strip() if item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(1) > div.px-400.py-300.de\\:p-300 > div.flex.flex-col > div.w-full.items-center.grid.grid-cols-\\[1fr_auto_1fr\\].gap-400.pb-100.pt-100 > div.text-end > span > div > div.w-full.whitespace-nowrap.lm\\:flex.flex > div > div') else None,
 
@@ -66,11 +65,11 @@ class Kiwi(Scraper):
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(2) > div > div.flex.flex-col > div.flex.w-full.items-center.justify-between > div.flex.flex-wrap.items-center.justify-center.gap-y-100 > div.flex.me-100 > div > div > time').text.strip() if item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(2) > div > div.flex.flex-col > div.flex.w-full.items-center.justify-between > div.flex.flex-wrap.items-center.justify-center.gap-y-100 > div.flex.me-100 > div > div > time') else None,
 
-            'return_arrive_hour': item.select_one(
+            'return_landing_hour': item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(2) > div > div.flex.flex-col > div.flex.w-full.items-center.justify-between > span:nth-child(5) > div > time').text.strip() if item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(2) > div > div.flex.flex-col > div.flex.w-full.items-center.justify-between > span:nth-child(5) > div > time') else None,
 
-            'return_arrive_airport': item.select_one(
+            'return_landing_airport': item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(2) > div > div.flex.flex-col > div.w-full.items-center.grid.grid-cols-\\[1fr_auto_1fr\\].gap-400.pb-100.pt-100 > div:nth-child(1) > span > div > div.w-full.whitespace-nowrap.lm\\:flex.flex > div > div').text.strip() if item.select_one(
                 'div > div > div.relative.lm\\:flex > div.relative.overflow-hidden.rounded-200.bg-card.shadow-result-card.transition-shadow.duration-fast.group-hover\\/result-card\\:shadow-result-card-active.lm\\:w-\\[65\\%\\] > div.relative.z-default.flex.h-full.flex-col > div:nth-child(2) > div > div.flex.flex-col > div.w-full.items-center.grid.grid-cols-\\[1fr_auto_1fr\\].gap-400.pb-100.pt-100 > div:nth-child(1) > span > div > div.w-full.whitespace-nowrap.lm\\:flex.flex > div > div') else None,
 
@@ -113,16 +112,8 @@ class Kiwi(Scraper):
             "upgrade-insecure-requests": "1",
             "user-agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36"
         }
-        button_selectors = ['#cookies_accept'] + [f'#react-view > div.flex.min-h-screen.flex-col > div.grow.bg-cloud-light > div > div > div > div > div > div.min-w-0.flex-grow.p-400.de\\:p-0.de\\:pb-600.de\\:ps-600.de\\:pt-600 > div > div > div:nth-child(3) > div > div > button']*10
+        button_selectors = ['#cookies_accept'] + [
+            f'#react-view > div.flex.min-h-screen.flex-col > div.grow.bg-cloud-light > div > div > div > div > div > div.min-w-0.flex-grow.p-400.de\\:p-0.de\\:pb-600.de\\:ps-600.de\\:pt-600 > div > div > div:nth-child(3) > div > div > button'] * 10
         selector = '#react-view > div.flex.min-h-screen.flex-col > div.grow.bg-cloud-light > div > div > div > div > div > div.min-w-0.flex-grow.p-400.de\\:p-0.de\\:pb-600.de\\:ps-600.de\\:pt-600 > div > div > div:nth-child(2) > div > div > div > div:nth-child(1)'
-        data =  await super().scarpe_from_page(selector=selector,button_selector=button_selectors, headers=headers)
+        data = await super().scarpe_from_page(selector=selector, button_selector=button_selectors, headers=headers)
         return pd.DataFrame(data)
-
-# Example
-# if __name__ == "__main__":
-#     Kiwi = Kiwi(departure_date='2025-03-05', return_date='2025-04-01', origin_city="paris", destination_city="london")
-#     print(Kiwi.create_url())
-#     get = asyncio.run(Kiwi.get_data())
-#     print(get.info())
-#     print(get.head())
-#     get.to_csv('test.csv', index_label=False)

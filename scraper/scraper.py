@@ -4,6 +4,7 @@ import json
 import os.path
 import string
 import random
+import re
 
 import bs4
 from bs4 import BeautifulSoup
@@ -11,10 +12,7 @@ from playwright.async_api import Page, async_playwright
 
 import pandas as pd
 
-
 DATE_FORMAT = '%Y-%m-%d'
-
-
 
 VIEWPORTS = [
     {'width': 1920, 'height': 1080},
@@ -216,6 +214,105 @@ def read_cookies(cookies_name: str) -> dict | None:
         return None
 
 
+def time_to_minutes(time_str: str) -> int:
+    if pd.isna(time_str):
+        return 0
+
+    # Extract hours and minutes using regex
+    hours = 0
+    minutes = 0
+
+    # Match patterns like "2h 45m", "2h", or "45m"
+    h_match = re.search(r'(\d+)h', time_str)
+    m_match = re.search(r'(\d+)m', time_str)
+
+    if h_match:
+        hours = int(h_match.group(1))
+    if m_match:
+        minutes = int(m_match.group(1))
+
+    return hours * 60 + minutes
+
+
+def detect_and_calculate_layover(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Detects flights with layovers based on flight duration comparison and calculates layover times.
+
+    Args:
+        df: Pandas DataFrame containing flight information
+
+    Returns:
+        DataFrame with added/updated layover information
+    """
+    # Create a copy to avoid modifying the original
+    df_result = df.copy()
+
+    # Dictionary of expected direct flight (in minutes) after checking the avrage flight lenght from these destinations
+    direct_flight_times = {
+        ('ROME', 'PARIS'): 140,  # 2h 20m
+        ('ROME', 'LONDON'): 180,  # 3h 0m
+        ('PARIS', 'ROME'): 130,  # 2h 10m
+        ('PARIS', 'LONDON'): 90,  # 1h 30m
+        ('LONDON', 'ROME'): 170,  # 2h 50m
+        ('LONDON', 'PARIS'): 85,  # 1h 25m
+    }
+
+    # New columns
+    df_result['layover_time'] = "0m"
+    df_result['return_layover_time'] = "0m"
+
+    for idx, row in df_result.iterrows():
+        origin = row['origin_city']
+        destination = row['destination_city']
+
+        # Get expected direct flight times
+        expected_outbound_time = direct_flight_times.get((origin, destination), 0)
+        expected_return_time = direct_flight_times.get((destination, origin), 0)
+
+        # Get actual flight times
+        actual_outbound_time = time_to_minutes(row['flight_length'])
+        actual_return_time = time_to_minutes(row['return_flight_length'])
+
+        # Calculate potential layover times
+        # With domain knowlage i can tell that a layover is at least 45 minutes
+        outbound_threshold = expected_outbound_time * 1.5
+        return_threshold = expected_return_time * 1.5
+
+        # Check if the flight has any layover
+        has_outbound_layover = actual_outbound_time > outbound_threshold and expected_outbound_time > 0
+        has_return_layover = actual_return_time > return_threshold and expected_return_time > 0
+
+        # Update the layover boolean field (validating the existing value)
+        df_result.at[idx, 'layover'] = has_outbound_layover or has_return_layover
+
+        # Format layover times to hours and minutes for readability
+        def format_layover_time(actual_time, expected_time, has_layover):
+            if not has_layover:
+                return "0m"
+
+            layover_minutes = actual_time - expected_time
+            hours = layover_minutes // 60
+            mins = layover_minutes % 60
+
+            if hours > 0 and mins > 0:
+                return f"{hours}h {mins}m"
+            elif hours > 0:
+                return f"{hours}h"
+            else:
+                return f"{mins}m"
+
+        # Calculate and store formatted layover times
+        df_result.at[idx, 'layover_time'] = format_layover_time(
+            actual_outbound_time, expected_outbound_time, has_outbound_layover
+        )
+
+        df_result.at[idx, 'return_layover_time'] = format_layover_time(
+            actual_return_time, expected_return_time, has_return_layover
+        )
+
+    return df_result
+
+
 class Scraper:
     def __init__(self, departure_date, return_date, origin_city, destination_city):
         self.departure_date = departure_date
@@ -327,7 +424,8 @@ class Scraper:
             'return_date'], flights_results['website'] = \
             ttt, los, datetime.datetime.today().strftime(
                 DATE_FORMAT), self.origin_city, self.destination_city, self.departure_date, self.return_date, self.__str__().lower()
-        return flights_results
+
+        return detect_and_calculate_layover(flights_results)
 
     async def write_data(self, ttt: int, los: int) -> str:
         data = await self._add_params(ttt=ttt, los=los)

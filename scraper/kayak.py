@@ -76,7 +76,7 @@ class Kayak(Scraper):
             'price': item.select_one(
                 'div.nrc6-price-section div.f8F1.f8F1-mod-frp-responsive div.f8F1-price-text').text.strip() if item.select_one(
                 'div.nrc6-price-section div.f8F1.f8F1-mod-frp-responsive div.f8F1-price-text') else None,
-            'is_direct': True if len(item.findAll("div", attrs={'class': "kI55-stop-dot"})) > 0 else False
+            'layover': True if len(item.findAll("div", attrs={'class': "kI55-stop-dot"})) > 0 else False
         } for item in items]
 
     async def get_data(self) -> pd.DataFrame:

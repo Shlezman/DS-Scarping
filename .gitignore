@@ -169,5 +169,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-cookies/*-cookies.json
-sessions/*.json
+/scraper/cookies/*
+/scraper/sessions/*
